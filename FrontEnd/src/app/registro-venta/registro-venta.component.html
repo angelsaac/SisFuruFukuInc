@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <h2>Registrar Venta</h2>
+  <button class="btn btn-warning" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i> Regresar
+  </button>
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="descripcionArticulo">Descripción del Artículo</label>
+      <input id="descripcionArticulo" class="form-control" formControlName="descripcionArticulo">
+      <div *ngIf="registroForm.get('descripcionArticulo')?.touched && registroForm.get('descripcionArticulo')?.invalid" class="text-danger">
+        <small *ngIf="registroForm.get('descripcionArticulo')?.errors?.['required']">Por favor ingrese la descripción del artículo</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fechaVenta">Fecha de Venta</label>
+      <input id="fechaVenta" type="date" class="form-control" formControlName="fechaVenta">
+      <div *ngIf="registroForm.get('fechaVenta')?.touched && registroForm.get('fechaVenta')?.invalid" class="text-danger">
+        <small *ngIf="registroForm.get('fechaVenta')?.errors?.['required']">Por favor seleccione la fecha de venta</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="importeTotal">Importe Total</label>
+      <input id="importeTotal" type="number" class="form-control" formControlName="importeTotal">
+      <div *ngIf="registroForm.get('importeTotal')?.touched && registroForm.get('importeTotal')?.invalid" class="text-danger">
+        <small *ngIf="registroForm.get('importeTotal')?.errors?.['required']">Por favor ingrese el importe total</small>
+        <small *ngIf="registroForm.get('importeTotal')?.errors?.['pattern']">Por favor ingrese un número válido</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="estatusVenta">Estatus de Venta</label>
+      <select id="estatusVenta" class="form-control" formControlName="estatusVenta">
+        <option value="Concretada">Concretada</option>
+        <option value="Pendiente de pago">Pendiente de pago</option>
+      </select>
+      <div *ngIf="registroForm.get('estatusVenta')?.touched && registroForm.get('estatusVenta')?.invalid" class="text-danger">
+        <small *ngIf="registroForm.get('estatusVenta')?.errors?.['required']">Por favor seleccione el estatus de la venta</small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="registroForm.invalid || isLoading">
+      {{ isLoading ? 'Registrando...' : 'Registrar Venta' }}
+    </button>
+  </form>
+</div>

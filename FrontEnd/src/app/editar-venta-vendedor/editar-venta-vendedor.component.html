@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3">
+        <button class="btn btn-warning" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Regresar
+        </button>
+        <h2>Editar Venta</h2>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+      <h2>Editar Venta</h2>
+      <button class="btn btn-warning" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Regresar
+      </button>
+    </div>
+  
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  
+    <form *ngIf="!isLoading" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="descripcionArticulo">Descripción del Artículo</label>
+        <input id="descripcionArticulo" type="text" class="form-control" formControlName="descripcionArticulo">
+        <div *ngIf="editForm.get('descripcionArticulo')?.touched && editForm.get('descripcionArticulo')?.invalid" class="text-danger">
+          <small *ngIf="editForm.get('descripcionArticulo')?.errors?.['required']">La descripción es requerida</small>
+        </div>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="fechaVenta">Fecha de Venta</label>
+        <input id="fechaVenta" type="date" class="form-control" formControlName="fechaVenta">
+        <div *ngIf="editForm.get('fechaVenta')?.touched && editForm.get('fechaVenta')?.invalid" class="text-danger">
+          <small *ngIf="editForm.get('fechaVenta')?.errors?.['required']">La fecha es requerida</small>
+        </div>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="importeTotal">Importe Total</label>
+        <input id="importeTotal" type="number" class="form-control" formControlName="importeTotal">
+        <div *ngIf="editForm.get('importeTotal')?.touched && editForm.get('importeTotal')?.invalid" class="text-danger">
+          <small *ngIf="editForm.get('importeTotal')?.errors?.['required']">El importe es requerido</small>
+          <small *ngIf="editForm.get('importeTotal')?.errors?.['pattern']">El importe debe ser un número válido</small>
+        </div>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="estatusVenta">Estatus de Venta</label>
+        <select id="estatusVenta" class="form-control" formControlName="estatusVenta">
+          <option value="Concretada">Concretada</option>
+          <option value="Pendiente de pago">Pendiente de pago</option>
+        </select>
+        <div *ngIf="editForm.get('estatusVenta')?.touched && editForm.get('estatusVenta')?.invalid" class="text-danger">
+          <small *ngIf="editForm.get('estatusVenta')?.errors?.['required']">El estatus es requerido</small>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Guardar Cambios</button>
+    </form>
+  </div>
+  

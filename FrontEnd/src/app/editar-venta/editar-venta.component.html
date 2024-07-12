@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <h2 class="text-center">Editar Venta</h2>
+    <div class="d-flex justify-content-between mb-3">
+      <button class="btn btn-warning" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Regresar
+      </button>
+    </div>
+    <div *ngIf="venta">
+      <p><strong>Nombre del Agente:</strong> {{ venta.nombreAgente }}</p>
+      <p><strong>Descripción del Artículo:</strong> {{ venta.descripcionArticulo }}</p>
+      <p><strong>Fecha de la Venta:</strong> {{ venta.fechaVenta }}</p>
+      <p><strong>Importe Total:</strong> {{ venta.importeTotal }}</p>
+      <p><strong>Estatus de Venta:</strong> {{ venta.estatusVenta }}</p>
+      <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="estatusSupervision">Estatus de Supervisión</label>
+          <select id="estatusSupervision" formControlName="estatusSupervision" class="form-control">
+            <option *ngFor="let option of estatusOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="editarForm.invalid">Actualizar</button>
+      </form>
+    </div>
+    <div *ngIf="!venta">
+      <p>Cargando...</p>
+    </div>
+  </div>
+  

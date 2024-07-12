@@ -1,0 +1,64 @@
+<div class="container mt-5">
+      <div class="d-flex justify-content-between mb-3">
+      <button class="btn btn-warning" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Regresar
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3>Registrar Usuario</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+          <div class="form-group mb-3">
+            <label for="nombreUsuario">Nombre de Usuario</label>
+            <input id="nombreUsuario" type="text" class="form-control" formControlName="nombreUsuario">
+            <div *ngIf="nombreUsuario?.touched && nombreUsuario?.invalid" class="text-danger">
+              <small *ngIf="nombreUsuario?.errors?.['required']">Por favor ingrese el nombre de usuario</small>
+              <small *ngIf="nombreUsuario?.errors?.['pattern']">El nombre de usuario no debe contener espacios</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="form-control" formControlName="nombre">
+            <div *ngIf="nombre?.touched && nombre?.invalid" class="text-danger">
+              <small *ngIf="nombre?.errors?.['required']">Por favor ingrese el nombre</small>
+              <small *ngIf="nombre?.errors?.['pattern']">El nombre no debe contener números</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="edad">Edad</label>
+            <input id="edad" type="number" class="form-control" formControlName="edad">
+            <div *ngIf="edad?.touched && edad?.invalid" class="text-danger">
+              <small *ngIf="edad?.errors?.['required']">Por favor ingrese la edad</small>
+              <small *ngIf="edad?.errors?.['pattern']">La edad debe ser un número</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="fechaIngreso">Fecha de Ingreso</label>
+            <input id="fechaIngreso" type="date" class="form-control" formControlName="fechaIngreso">
+            <div *ngIf="fechaIngreso?.touched && fechaIngreso?.invalid" class="text-danger">
+              <small>Por favor seleccione la fecha de ingreso</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="puesto">Puesto</label>
+            <select id="puesto" class="form-control" formControlName="puesto">
+              <option value="Vendedor">Vendedor</option>
+              <option value="Supervisor">Supervisor</option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" class="form-control" formControlName="password">
+            <div *ngIf="password?.touched && password?.invalid" class="text-danger">
+              <small *ngIf="password?.errors?.['required']">Por favor ingrese la contraseña</small>
+              <small *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="registroForm.invalid">Registrar Usuario</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
